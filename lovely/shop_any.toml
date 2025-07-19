@@ -1,0 +1,52 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 1
+
+    # Shop spawn rate modify
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''
+if v.id == 'no_reward' then 
+    self.GAME.modifiers.no_blind_reward = self.GAME.modifiers.no_blind_reward or {}
+    self.GAME.modifiers.no_blind_reward.Small = true
+    self.GAME.modifiers.no_blind_reward.Big = true
+    self.GAME.modifiers.no_blind_reward.Boss = true
+elseif v.id == 'no_reward_specific' then
+    self.GAME.modifiers.no_blind_reward = self.GAME.modifiers.no_blind_reward or {}
+    self.GAME.modifiers.no_blind_reward[v.value] = true
+elseif v.value then
+    self.GAME.modifiers[v.id] = v.value
+elseif v.id == 'no_shop_jokers' then 
+    self.GAME.joker_rate = 0
+else
+    self.GAME.modifiers[v.id] = true 
+end
+'''
+position = "at"
+payload = '''
+if v.id == 'no_reward' then 
+    self.GAME.modifiers.no_blind_reward = self.GAME.modifiers.no_blind_reward or {}
+    self.GAME.modifiers.no_blind_reward.Small = true
+    self.GAME.modifiers.no_blind_reward.Big = true
+    self.GAME.modifiers.no_blind_reward.Boss = true
+elseif v.id == 'no_reward_specific' then
+    self.GAME.modifiers.no_blind_reward = self.GAME.modifiers.no_blind_reward or {}
+    self.GAME.modifiers.no_blind_reward[v.value] = true
+elseif v.value then
+    self.GAME.modifiers[v.id] = v.value
+elseif v.id == 'no_shop_jokers' then 
+    self.GAME.joker_rate = 0
+elseif v.id == 'chlen_no_shop_planets' then
+    self.GAME.planet_rate = 0
+elseif v.id == 'chlen_no_shop_tarots' then
+    self.GAME.tarot_rate = 0
+elseif v.id == 'chlen_shop_spectrals' then
+    self.GAME.spectral_rate = 2
+else
+    self.GAME.modifiers[v.id] = true 
+end
+'''
+match_indent = true
+times = 1

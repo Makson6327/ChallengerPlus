@@ -1,0 +1,30 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 1
+
+    # Reducing mult to one on every hand
+[[patches]]
+[patches.pattern]
+target = "blind.lua"
+pattern = '''
+if obj.modify_hand and type(obj.modify_hand) == 'function' then
+    return obj:modify_hand(cards, poker_hands, text, mult, hand_chips)
+elseif self.name == 'The Flint' then
+    self.triggered = true
+    return math.max(math.floor(mult*0.5 + 0.5), 1), math.max(math.floor(hand_chips*0.5 + 0.5), 0), true
+end
+'''
+position = "at"
+payload = '''
+if obj.modify_hand and type(obj.modify_hand) == 'function' then
+    return obj:modify_hand(cards, poker_hands, text, mult, hand_chips)
+elseif self.name == 'The Flint' then
+    self.triggered = true
+    return math.max(math.floor(mult*0.5 + 0.5), 1), math.max(math.floor(hand_chips*0.5 + 0.5), 0), true
+elseif G.GAME.modifiers.chlen_mult_reduce then
+    return math.max(math.floor(mult/mult), 1), math.max(math.floor(hand_chips), 0), true
+end
+'''
+match_indent = true
+times = 1

@@ -1,0 +1,21 @@
+{
+	"id": "Chlen",
+	"name": "Challenger Plus",
+	"display_name": "Challenger Plus",
+	"author": ["Makson6327"],
+	"description": "Vanilla-like mod for Balatro that adds new funny (and not really) challenges! New challenges soon!",
+	"prefix": "chlen",
+	"main_file": "main.lua",
+	"priority": 0,
+	"badge_colour": "008080",
+	"badge_text_colour": "40e0d0",
+	"version": "1.0.0",
+	"git_owner": "Makson6327",
+	"git_repo": "ChallengerPlus",
+	"mod_path": "Mods/ChallengerPlus",
+	"download_suffix": "ChallengerPlus.zip",
+	"dependencies": [
+		"Steamodded (>=1.0.0~BETA-0711a)",
+		"Lovely (>=0.7.1)"
+	]
+}

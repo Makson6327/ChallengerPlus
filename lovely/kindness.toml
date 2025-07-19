@@ -1,0 +1,56 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 1
+
+    # List unallowed hands
+[[patches]]
+[patches.pattern]
+target = "blind.lua"
+pattern = '''
+if not reset and obj.set_blind and type(obj.set_blind) == 'function' then
+    obj:set_blind()
+'''
+position = "after"
+payload = '''
+elseif G.GAME.modifiers.chlen_of_a_kind then
+    self.hands = {
+        ["Flush Five"] = true,
+        ["Flush House"] = true,
+        ["Five of a Kind"] = false,
+        ["Straight Flush"] = true,
+        ["Four of a Kind"] = false,
+        ["Full House"] = true,
+        ["Flush"] = true,
+        ["Straight"] = true,
+        ["Three of a Kind"] = false,
+        ["Two Pair"] = true,
+        ["Pair"] = true,
+        ["High Card"] = true,
+    }
+'''
+match_indent = true
+times = 1
+
+    # Unallow hands
+[[patches]]
+[patches.pattern]
+target = "blind.lua"
+pattern = '''
+if self.name == 'The Eye' then
+    if self.hands[handname] then
+        self.triggered = true
+        return true
+    end
+    if not check then self.hands[handname] = true end
+'''
+position = "after"
+payload = '''
+elseif G.GAME.modifiers.chlen_of_a_kind then
+    if self.hands[handname] then
+        self.triggered = true
+        return true
+    end
+'''
+match_indent = true
+times = 1

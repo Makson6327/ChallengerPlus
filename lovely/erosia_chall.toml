@@ -1,0 +1,63 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 1
+
+    # Destroying cards at end of round
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if h_dollars ~= 0 then
+    ret.h_dollars = h_dollars
+    ret.card = self
+end
+'''
+position = "after"
+payload = '''
+if G.GAME.modifiers.chlen_hand_destroying then
+    G.E_MANAGER:add_event(Event({
+        trigger = 'before',
+        delay = 0.0,
+        func = (function()
+            if G.GAME.last_hand_played then
+                local cards = {}
+                for _, v in ipairs(G.hand.cards) do
+                    cards[#cards+1] = v
+                end
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    delay = 0.2,
+                    func = function() 
+                        if #cards > 0 and type(effects) == 'table' then
+                            effect.sound = 'tarot1'
+                            effects.instant = true
+                            SMODS.calculate_effect(effects, card)
+                        end
+                        for _, v in ipairs(cards) do
+                            if SMODS.shatters(v) then
+                                v:shatter()
+                            else
+                                v:start_dissolve()
+                            end
+                        end
+                        G.E_MANAGER:add_event(Event({
+                            trigger = 'after',
+                            delay = 0.3,
+                            func = function()
+                                SMODS.calculate_context({remove_playing_cards = true, removed = cards})
+                                return true
+                            end
+                        }))
+                        return true 
+                    end
+                }))
+                
+            end
+        return true
+        end
+    )}))
+end
+'''
+match_indent = true
+times = 1
