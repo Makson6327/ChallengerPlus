@@ -1,0 +1,37 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 1
+
+    # Check if there at least eight jokers
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''
+if G.GAME.round_resets.ante == G.GAME.win_ante and G.GAME.blind:get_type() == 'Boss' then
+    game_won = true
+    G.GAME.won = true
+end
+'''
+position = "at"
+payload = '''
+if G.GAME.modifiers.chlen_ten_jokers and G.GAME.round_resets.ante == G.GAME.win_ante and G.GAME.blind:get_type() == 'Boss' then
+    if (#G.jokers.cards - 8) < 0 then
+        G.STATE = G.STATES.GAME_OVER
+        if not G.GAME.won and not G.GAME.seeded and not G.GAME.challenge then 
+            G.PROFILES[G.SETTINGS.profile].high_scores.current_streak.amt = 0
+        end
+        G:save_settings()
+        G.FILE_HANDLER.force = true
+        G.STATE_COMPLETE = false
+    else 
+        game_won = true
+        G.GAME.won = true
+    end
+elseif G.GAME.round_resets.ante == G.GAME.win_ante and G.GAME.blind:get_type() == 'Boss' then
+    game_won = true
+    G.GAME.won = true
+end
+'''
+match_indent = true
+times = 1

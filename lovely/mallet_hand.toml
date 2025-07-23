@@ -1,0 +1,55 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 1
+
+    # Randomize hand size
+[[patches]]
+[patches.pattern]
+target = "blind.lua"
+pattern = '''
+elseif self.name == 'Amber Acorn' and not reset and #G.jokers.cards > 0 then
+    G.jokers:unhighlight_all()
+    for k, v in ipairs(G.jokers.cards) do
+        v:flip()
+    end
+    if #G.jokers.cards > 1 then 
+        G.E_MANAGER:add_event(Event({ trigger = 'after', delay = 0.2, func = function() 
+            G.E_MANAGER:add_event(Event({ func = function() G.jokers:shuffle('aajk'); play_sound('cardSlide1', 0.85);return true end })) 
+            delay(0.15)
+            G.E_MANAGER:add_event(Event({ func = function() G.jokers:shuffle('aajk'); play_sound('cardSlide1', 1.15);return true end })) 
+            delay(0.15)
+            G.E_MANAGER:add_event(Event({ func = function() G.jokers:shuffle('aajk'); play_sound('cardSlide1', 1);return true end })) 
+            delay(0.5)
+        return true end })) 
+    end
+end
+'''
+position = "after"
+payload = '''
+if G.GAME.modifiers.chlen_random_hand_size and not reset then
+    local mallet = pseudorandom("mallet_that_hand", -2, 1)
+    G.hand:change_size(mallet)
+end
+'''
+match_indent = true
+times = 1
+
+    # Back to normal
+[[patches]]
+[patches.pattern]
+target = "blind.lua"
+pattern = '''
+elseif self.name == 'The Manacle' and not self.disabled then
+    G.hand:change_size(1)
+end
+'''
+position = "after"
+payload = '''
+if G.GAME.modifiers.chlen_random_hand_size then
+    local unmallet = 8 - G.hand.config.card_limit
+    G.hand:change_size(unmallet)
+end
+'''
+match_indent = true
+times = 1

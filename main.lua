@@ -178,6 +178,7 @@ SMODS.Challenge {
                 'p_standard_mega_1', 'p_standard_mega_2' }
             },
             {id = 'j_vampire'},
+            {id = 'j_marble'},
             {id = 'j_certificate'},
             {id = 'j_midas_mask'},
             {id = 'c_grim'},
@@ -419,6 +420,8 @@ SMODS.Challenge {
                 'p_standard_mega_1', 'p_standard_mega_2' }
             },
             {id = 'j_luchador'},
+            {id = 'j_chicot'},
+            {id = 'j_marble'},
             {id = 'j_matador'},
             {id = 'j_vampire'},
             {id = 'j_certificate'},
@@ -654,7 +657,7 @@ SMODS.Challenge {
             {id = 'p_buffoon_normal_1', ids = {
                 'p_buffoon_normal_1','p_buffoon_normal_2','p_buffoon_jumbo_1','p_buffoon_mega_1',
             }},
-            },
+        },
         banned_tags = {
             {id = 'tag_rare'},
             {id = 'tag_uncommon'},
@@ -670,6 +673,127 @@ SMODS.Challenge {
             {id = 'bl_final_heart', type = 'blind'},
             {id = 'bl_final_leaf', type = 'blind'}
         }
+    },
+    deck = {
+        type = 'Challenge Deck'
+    }
+}
+
+SMODS.Challenge {
+    key = 'circus',
+    rules = {
+        custom = {
+            {id = 'chlen_ten_jokers'},
+        },
+        modifiers = {}
+    },
+    jokers = {},
+    vouchers = {},
+    restrictions = {
+        banned_cards = {},
+        banned_tags = {},
+        banned_other = {}
+    },
+    deck = {
+        type = 'Challenge Deck'
+    }
+}
+
+SMODS.Challenge {
+    key = 'broken_gd',
+    rules = {
+        custom = {
+            {id = 'chlen_hands_n_discards'},
+            {id = 'no_extra_hand_money'},
+            {id = 'chlen_consolation_prize'}
+        },
+        modifiers = {
+            {id = 'discards', value = 40},
+            {id = 'hands', value = 55},
+        }
+    },
+    jokers = {},
+    vouchers = {},
+    restrictions = {
+        banned_cards = {
+            {id = 'v_wasteful'},
+            {id = 'v_recyclomancy'},
+            {id = 'v_grabber'},
+            {id = 'v_nacho_tong'},
+            {id = 'v_hieroglyph'},
+            {id = 'v_petroglyph'},
+            {id = 'j_drunkard'},
+            {id = 'j_mystic_summit'},
+            {id = 'j_merry_andy'},
+            {id = 'j_burglar'},
+            {id = 'j_troubadour'},
+            {id = 'j_acrobat'},
+            {id = 'j_dusk'},
+            {id = 'j_banner'},
+            {id = 'j_delayed_grat'}
+        },
+        banned_tags = {
+            {id = 'tag_handy'},
+            {id = 'tag_garbage'}
+        },
+        banned_other = {
+            {id = 'bl_needle', type = "blind"},
+            {id = 'bl_water', type = "blind"}
+        }
+    },
+    deck = {
+        type = 'Challenge Deck'
+    }
+}
+
+SMODS.Challenge {
+    key = 'crushed_hand',
+    rules = {
+        custom = {
+            {id = 'chlen_random_hand_size'}
+        },
+        modifiers = {}
+    },
+    jokers = {},
+    vouchers = {},
+    restrictions = {
+        banned_cards = {
+            {id = 'v_paint_brush'},
+            {id = 'v_palette'},
+            {id = 'j_troubadour'},
+            {id = 'j_juggler'},
+            {id = 'j_turtle_bean'},
+            {id = 'j_stuntman'},
+            {id = 'j_merry_andy'},
+            {id = 'c_ectoplasm'},
+            {id = 'c_ouija'}
+        },
+        banned_tags = {
+            {id = 'tag_juggle'}
+        },
+        banned_other = {
+            {id = 'bl_manacle', type = "blind"}
+        }
+    },
+    deck = {
+        type = 'Challenge Deck'
+    }
+}
+
+SMODS.Challenge {
+    key = 'fortknox',
+    rules = {
+        custom = {
+            {id = 'chlen_big_finisher'},
+        },
+        modifiers = {}
+    },
+    jokers = {},
+    vouchers = {},
+    restrictions = {
+        banned_cards = {},
+        banned_tags = {},
+        banned_other = {}
     },
     deck = {
         type = 'Challenge Deck'

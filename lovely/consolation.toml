@@ -1,0 +1,26 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 1
+
+    # Plus four dollars
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''
+if G.GAME.current_round.discards_left > 0 and G.GAME.modifiers.money_per_discard then
+    add_round_eval_row({dollars = G.GAME.current_round.discards_left*(G.GAME.modifiers.money_per_discard), disp = G.GAME.current_round.discards_left, bonus = true, name='discards', pitch = pitch})
+    pitch = pitch + 0.06
+    dollars = dollars +  G.GAME.current_round.discards_left*(G.GAME.modifiers.money_per_discard)
+end
+'''
+position = "after"
+payload = '''
+if G.GAME.modifiers.chlen_consolation_prize then
+    add_round_eval_row({dollars = 3, disp = G.GAME.current_round.discards_left, bonus = true, name='hands', pitch = pitch})
+    pitch = pitch + 0.06
+    dollars = dollars + 3
+end
+'''
+match_indent = true
+times = 1
