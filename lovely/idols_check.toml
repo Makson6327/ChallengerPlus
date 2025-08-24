@@ -1,0 +1,83 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 1
+
+    # Idol code changing
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+local obj = self.config.center
+if self.ability.set ~= "Enhanced" and obj.calculate and type(obj.calculate) == 'function' then
+    local o, t = obj:calculate(self, context)
+    if o or t then return o, t end
+end
+local context_blueprint_card = context.blueprint_card
+'''
+position = "after"
+payload = '''
+local trigger_count = 0
+'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if self.ability.name == 'The Idol' and
+    context.other_card:get_id() == G.GAME.current_round.idol_card.id and 
+    context.other_card:is_suit(G.GAME.current_round.idol_card.suit) then
+        return {
+            x_mult = self.ability.extra,
+            colour = G.C.RED,
+            card = self
+        }
+    end
+'''
+position = "at"
+payload = '''
+if self.ability.name == 'The Idol' and
+    context.other_card:get_id() == G.GAME.current_round.idol_card.id and 
+    context.other_card:is_suit(G.GAME.current_round.idol_card.suit) then
+        trigger_count = trigger_count + 1
+        return {
+            x_mult = self.ability.extra,
+            colour = G.C.RED,
+            card = self,
+        }
+    end
+'''
+match_indent = true
+times = 1
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if self.ability.name == 'Egg' then
+    self.ability.extra_value = self.ability.extra_value + self.ability.extra
+    self:set_cost()
+    return {
+        message = localize('k_val_up'),
+        colour = G.C.MONEY
+    }
+end
+'''
+position = "after"
+payload = '''
+if self.ability.name == 'The Idol' and G.GAME.modifiers.chlen_idols_check then
+    if trigger_count == 0 then
+        G.STATE = G.STATES.GAME_OVER
+        if not G.GAME.won and not G.GAME.seeded and not G.GAME.challenge then 
+            G.PROFILES[G.SETTINGS.profile].high_scores.current_streak.amt = 0
+        end
+        G:save_settings()
+        G.FILE_HANDLER.force = true
+        G.STATE_COMPLETE = false
+    end
+end
+'''
+match_indent = true
+times = 1

@@ -15,6 +15,13 @@ return {
             c_chlen_broken_gd = "Broken Game Design",
             c_chlen_crushed_hand = "Hand Crushed By A Mallet",
             c_chlen_fortknox = "Fort Knox",
+            c_chlen_bankacc = "Blocked Bank Account",
+            c_chlen_cases = "Case Opening Simulator",
+            c_chlen_ladies = "Come My Lady",
+            c_chlen_aura_farm = "Aura Farming",
+            c_chlen_crap = "Crap Factory",
+            c_chlen_cardshopping = "Card Shopping",
+            c_chlen_choice = "Illusion of Choice"
         },
         v_text = {
             ch_c_chlen_mult_reduce = {
@@ -82,6 +89,30 @@ return {
             },
             ch_c_chlen_higher_ante = {
                 "Winning Ante is {C:attention}Ante 12"
+            },
+            ch_c_chlen_idols_check = {
+                "Idol Joker must be triggered at least once per round"
+            },
+            ch_c_chlen_zero_sell_value = {
+                "Selling cards no longer gives {C:money}money"
+            },
+            ch_c_chlen_only_faces = {
+                "Only cards with face cards can appear in the shop and booster packs"
+            },
+            ch_c_chlen_anaglyph = {
+                "After defeating each Blind, gain a {C:attention,T:tag_double}Double Tag",
+            },
+            ch_c_chlen_hooker = {
+                "Discards 5 random cards per hand played"
+            },
+            ch_c_chlen_edition_check = {
+                "At least half of cards in your full deck need to have {C:dark_edition}edition{} at the end of Ante 8"
+            },
+            ch_c_chlen_destroy_editionless = {
+                "After defeating each Blind, destroy each card without edition"
+            },
+            ch_c_chlen_modified_packs = {
+                "Booster packs contains only 1 card and can't be skipped"
             }
         },
     },

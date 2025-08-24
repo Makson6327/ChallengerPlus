@@ -799,3 +799,306 @@ SMODS.Challenge {
         type = 'Challenge Deck'
     }
 }
+
+SMODS.Challenge {
+    key = 'bankacc',
+    rules = {
+        custom = {
+            {id = 'no_reward'},
+            {id = 'no_interest'},
+            {id = 'no_extra_hand_money'},
+            {id = 'chlen_zero_sell_value'}
+        },
+        modifiers = {
+            {id = 'dollars', value = 150},
+        }
+    },
+    jokers = {},
+    vouchers = {},
+    restrictions = {
+        banned_cards = {
+            {id = 'v_seed_money'},
+            {id = 'v_money_tree'},
+            {id = 'v_illusion'},
+            {id = 'j_to_the_moon'},
+            {id = 'j_rocket'},
+            {id = 'j_golden'},
+            {id = 'j_satellite'},
+            {id = 'j_egg'},
+            {id = 'j_gift'},
+            {id = 'j_midas_mask'},
+            {id = 'j_rough_gem'},
+            {id = 'j_faceless'},
+            {id = 'j_delayed_grat'},
+            {id = 'j_todo_list'},
+            {id = 'j_business'},
+            {id = 'j_reserved_parking'},
+            {id = 'j_certificate'},
+            {id = 'j_trading'},
+            {id = 'j_cloud_9'},
+            {id = 'j_mail'},
+            {id = 'j_matador'},
+            {id = 'p_standard_normal_1', ids = {
+                'p_standard_normal_1', 'p_standard_normal_2',
+                'p_standard_normal_3', 'p_standard_normal_4',
+                'p_standard_jumbo_1', 'p_standard_jumbo_2',
+                'p_standard_mega_1', 'p_standard_mega_2' }
+            },
+            {id = 'c_talisman'},
+            {id = 'c_wraith'},
+            {id = 'c_immolate'},
+            {id = 'c_incantation'},
+            {id = 'c_familiar'},
+            {id = 'c_grim'},
+            {id = 'c_magician'},
+            {id = 'c_devil'},
+            {id = 'c_temperance'},
+            {id = 'c_hermit'}
+        },
+        banned_tags = {
+            {id = 'tag_standard'},
+            {id = 'tag_investment'},
+            {id = 'tag_skip'},
+            {id = 'tag_garbage'},
+            {id = 'tag_handy'},
+            {id = 'tag_economy'}
+        },
+        banned_other = {
+            {id = 'bl_ox', type = "blind"}
+        }
+    },
+    deck = {
+        type = 'Challenge Deck'
+    }
+}
+
+SMODS.Challenge {
+    key = 'cases',
+    rules = {
+        custom = {
+            {id = 'chlen_no_shops'},
+            {id = 'chlen_anaglyph'},
+        },
+        modifiers = {}
+    },
+    jokers = {
+        {id = 'j_red_card', eternal = true}
+    },
+    vouchers = {},
+    restrictions = {
+        banned_cards = {},
+        banned_tags = {
+            {id = 'tag_uncommon'},
+            {id = 'tag_rare'},
+            {id = 'tag_negative'},
+            {id = 'tag_foil'},
+            {id = 'tag_holo'},
+            {id = 'tag_polychrome'},
+            {id = 'tag_investment'},
+            {id = 'tag_voucher'},
+            {id = 'tag_handy'},
+            {id = 'tag_garbage'},
+            {id = 'tag_coupon'},
+            {id = 'tag_double'},
+            {id = 'tag_juggle'},
+            {id = 'tag_d_six'},
+            {id = 'tag_top_up'},
+            {id = 'tag_skip'},
+            {id = 'tag_orbital'},
+            {id = 'tag_economy'},
+            {id = 'tag_boss'}
+        },
+        banned_other = {}
+    },
+    deck = {
+        type = 'Challenge Deck'
+    }
+}
+
+SMODS.Challenge {
+    key = 'ladies',
+    rules = {
+        custom = {
+            {id = 'chlen_queen_check'},
+        },
+        modifiers = {}
+    },
+    jokers = {},
+    vouchers = {},
+    consumeables = {
+        {id = 'c_strength'},
+    },
+    restrictions = {
+        banned_cards = {
+            {id = 'v_magic_trick'},
+            {id = 'v_illusion'},
+            {id = 'p_standard_normal_1', ids = {
+                'p_standard_normal_1', 'p_standard_normal_2',
+                'p_standard_normal_3', 'p_standard_normal_4',
+                'p_standard_jumbo_1', 'p_standard_jumbo_2',
+                'p_standard_mega_1', 'p_standard_mega_2' }
+            },
+            {id = 'c_cryptid'},
+            {id = 'c_incantation'},
+            {id = 'c_familiar'},
+            {id = 'c_grim'},
+            {id = 'c_ouija'},
+            {id = 'c_immolate'},
+            {id = 'c_justice'},
+            {id = 'c_hanged_man'},
+            {id = 'j_sixth_sense'},
+            {id = 'j_trading'},
+            {id = 'j_dna'},
+            {id = 'j_certificate'}
+        },
+        banned_tags = {
+            {id = 'tag_standard'},
+        },
+        banned_other = {}
+    },
+    deck = {
+        type = 'Challenge Deck',
+        cards = {
+            {s='H',r='8'},
+            {s='H',r='8'},
+            {s='H',r='8'},
+            {s='H',r='8'},
+            {s='H',r='8'},
+        }
+    }
+}
+
+SMODS.Challenge {
+    key = 'aura_farm',
+    rules = {
+        custom = {
+            {id = 'chlen_edition_check'},
+            {id = 'chlen_shop_spectrals'}
+        },
+        modifiers = {}
+    },
+    jokers = {},
+    vouchers = {
+        {id = 'v_crystal_ball'},
+        {id = 'v_omen_globe'}
+    },
+    consumeables = {
+        {id = 'c_aura'},
+        {id = 'c_aura'},
+        {id = 'c_aura'},
+    },
+    restrictions = {
+        banned_cards = {},
+        banned_tags = {},
+        banned_other = {}
+    },
+    deck = {
+        type = 'Challenge Deck'
+    }
+}
+
+SMODS.Challenge {
+    key = 'cardshopping',
+    rules = {
+        custom = {
+            {id = 'chlen_destroy_editionless'},
+            {id = 'no_shop_jokers'},
+            {id = 'chlen_no_shop_planets'},
+            {id = 'chlen_no_shop_tarots'}
+        },
+        modifiers = {
+            {id = 'joker_slots', value = 0},
+        }
+    },
+    jokers = {
+        {id = 'j_splash', edition = 'negative', eternal = true}
+    },
+    vouchers = {
+        {id = 'v_magic_trick'},
+        {id = 'v_illusion'},
+        {id = 'v_reroll_surplus'},
+        {id = 'v_reroll_glut'},
+        {id = 'v_clearance_sale'},
+        {id = 'v_liquidation'},
+    },
+    consumeables = {},
+    restrictions = {
+        banned_cards = {
+            {id = 'c_judgement'},
+            {id = 'c_wraith'},
+            {id = 'c_soul'},
+            {id = 'v_antimatter'},
+            {id = 'p_buffoon_normal_1', ids = {
+                'p_buffoon_normal_1','p_buffoon_normal_2','p_buffoon_jumbo_1','p_buffoon_mega_1',
+            }},
+        },
+        banned_tags = {
+            {id = 'tag_rare'},
+            {id = 'tag_uncommon'},
+            {id = 'tag_holo'},
+            {id = 'tag_polychrome'},
+            {id = 'tag_negative'},
+            {id = 'tag_foil'},
+            {id = 'tag_buffoon'},
+            {id = 'tag_top_up'},
+        },
+        banned_other = {
+            {id = 'bl_final_leaf', type = 'blind'},
+            {id = 'bl_final_acorn', type = 'blind'},
+            {id = 'bl_final_heart', type = 'blind'},
+        }
+    },
+    deck = {
+        type = 'Challenge Deck',
+        cards = {
+            {s='H',r='K',},
+            {s='C',r='K',},
+            {s='S',r='K',},
+            {s='D',r='K',},
+        }
+    }
+}
+
+SMODS.Challenge {
+    key = 'choice',
+    rules = {
+        custom = {
+            {id = 'chlen_modified_packs'},
+        },
+        modifiers = {}
+    },
+    jokers = {},
+    vouchers = {},
+    consumeables = {},
+    restrictions = {
+        banned_cards = {
+            {id = 'j_red_card'},
+            {id = 'p_buffoon_jumbo_1', ids = {
+                'p_buffoon_jumbo_1','p_buffoon_mega_1',
+            }},
+            {id = 'p_spectral_jumbo_1', ids = {
+                'p_spectral_jumbo_1','p_spectral_mega_1',
+            }},
+            {id = 'p_arcana_jumbo_1', ids = {
+                'p_arcana_jumbo_1','p_arcana_mega_1','p_arcana_jumbo_2','p_arcana_mega_2',
+            }},
+            {id = 'p_celestial_jumbo_1', ids = {
+                'p_celestial_jumbo_1','p_celestial_mega_1','p_celestial_jumbo_2','p_celestial_mega_2',
+            }},
+            {id = 'p_standard_jumbo_1', ids = {
+                'p_standard_jumbo_1','p_standard_mega_1','p_standard_jumbo_2','p_standard_mega_2',
+            }},
+        },
+        banned_tags = {
+            {id = 'tag_buffoon'},
+            {id = 'tag_charm'},
+            {id = 'tag_meteor'},
+            {id = 'tag_standard'},
+            {id = 'tag_ethereal'}
+        },
+        banned_other = {}
+    },
+    deck = {
+        type = 'Challenge Deck'
+    }
+}

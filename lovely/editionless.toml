@@ -1,0 +1,54 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 1
+
+    # Destroy cards without editions each round
+[[patches]]
+[patches.pattern]
+target = "back.lua"
+pattern = '''
+if self.name == 'Anaglyph Deck' and args.context == 'eval' and G.GAME.last_blind and G.GAME.last_blind.boss then
+    G.E_MANAGER:add_event(Event({
+        func = (function()
+            add_tag(Tag('tag_double'))
+            play_sound('generic1', 0.9 + math.random()*0.1, 0.8)
+            play_sound('holo1', 1.2 + math.random()*0.1, 0.4)
+            return true
+        end)
+    }))
+end
+'''
+position = "after"
+payload = '''
+if G.GAME.modifiers.chlen_destroy_editionless and args.context == 'eval' and G.GAME.last_blind then
+    local non_editions = {}
+    for i = 1, #G.playing_cards do
+        if G.playing_cards[i]:get_edition() == nil then
+            table.insert(non_editions, G.playing_cards[i])
+        end
+    end
+    local trash_list = non_editions
+    if #trash_list > 0 then 
+        G.E_MANAGER:add_event(Event({
+            trigger = 'before',
+            delay = 0.7,
+            func = function()
+                for _, card_to_trash in ipairs(trash_list) do
+                    if not card_to_trash.removed then
+                    card_to_trash:start_dissolve(nil, nil)
+                    end
+                end
+                return true
+            end
+        }))
+        for _, card_to_trash in ipairs(trash_list) do
+            card_to_trash.destroyed = true
+        end
+        SMODS.calculate_context({remove_playing_cards = true, removed = trash_list})
+        non_editions = {}
+    end
+end
+'''
+match_indent = true
+times = 1

@@ -1,0 +1,52 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 1
+
+    # Set new size
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+local _size = self.ability.extra
+'''
+position = "after"
+payload = '''
+if G.GAME.modifiers.chlen_modified_packs then
+    _size = 1
+end
+'''
+match_indent = true
+times = 1
+
+    # Remove skipping
+[[patches]]
+[patches.pattern]
+target = "functions/button_callbacks.lua"
+pattern = '''
+G.FUNCS.can_skip_booster = function(e)
+    if G.pack_cards and (not (G.GAME.STOP_USE and G.GAME.STOP_USE > 0)) and
+(G.STATE == G.STATES.SMODS_BOOSTER_OPENED or G.STATE == G.STATES.PLANET_PACK or G.STATE == G.STATES.STANDARD_PACK or G.STATE == G.STATES.BUFFOON_PACK or (G.hand  )) then 
+        e.config.colour = G.C.GREY
+        e.config.button = 'skip_booster'
+    else
+        e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+        e.config.button = nil
+    end
+end
+'''
+position = "at"
+payload = '''
+G.FUNCS.can_skip_booster = function(e)
+    if G.pack_cards and not G.GAME.modifiers.chlen_modified_packs and (not (G.GAME.STOP_USE and G.GAME.STOP_USE > 0)) and
+(G.STATE == G.STATES.SMODS_BOOSTER_OPENED or G.STATE == G.STATES.PLANET_PACK or G.STATE == G.STATES.STANDARD_PACK or G.STATE == G.STATES.BUFFOON_PACK or (G.hand  )) then 
+        e.config.colour = G.C.GREY
+        e.config.button = 'skip_booster'
+    else
+        e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+        e.config.button = nil
+    end
+end
+'''
+match_indent = true
+times = 1

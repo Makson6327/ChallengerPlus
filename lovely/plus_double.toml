@@ -1,0 +1,36 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 1
+
+    # Create Double Tag each round
+[[patches]]
+[patches.pattern]
+target = "back.lua"
+pattern = '''
+if self.name == 'Anaglyph Deck' and args.context == 'eval' and G.GAME.last_blind and G.GAME.last_blind.boss then
+    G.E_MANAGER:add_event(Event({
+        func = (function()
+            add_tag(Tag('tag_double'))
+            play_sound('generic1', 0.9 + math.random()*0.1, 0.8)
+            play_sound('holo1', 1.2 + math.random()*0.1, 0.4)
+            return true
+        end)
+    }))
+end
+'''
+position = "after"
+payload = '''
+if G.GAME.modifiers.chlen_anaglyph and args.context == 'eval' and G.GAME.last_blind then
+    G.E_MANAGER:add_event(Event({
+        func = (function()
+            add_tag(Tag('tag_double'))
+            play_sound('generic1', 0.9 + math.random()*0.1, 0.8)
+            play_sound('holo1', 1.2 + math.random()*0.1, 0.4)
+            return true
+        end)
+    }))
+end
+'''
+match_indent = true
+times = 1

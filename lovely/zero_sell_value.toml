@@ -1,0 +1,22 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 1
+
+    # Set sell value to zero
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+self.sell_cost = math.max(1, math.floor(self.cost/2)) + (self.ability.extra_value or 0)
+'''
+position = "at"
+payload = '''
+if G.GAME.modifiers.chlen_zero_sell_value then
+    self.sell_cost = 0
+else
+    self.sell_cost = math.max(1, math.floor(self.cost/2)) + (self.ability.extra_value or 0)
+end
+'''
+match_indent = true
+times = 1

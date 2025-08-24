@@ -3,7 +3,7 @@
 	"name": "Challenger Plus",
 	"display_name": "Challenger Plus",
 	"author": ["Makson6327"],
-	"description": "Vanilla-like mod for Balatro that adds new funny (and not really) challenges! New challenges soon!",
+	"description": "Mod for Balatro that adds new funny (and not really) challenges! New challenges soon!",
 	"prefix": "chlen",
 	"main_file": "main.lua",
 	"priority": 0,
